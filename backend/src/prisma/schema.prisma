@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+enum AdmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+}
+
+model Parent {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String
+  email     String?  @unique
+  address   String?
+  children  Child[]
+}
+
+model Child {
+  id            String   @id @default(uuid())
+  name          String
+  dob           DateTime
+  gender        String
+  medicalNotes  String?
+  status        String   @default("ACTIVE")
+  parentId      String
+  parent        Parent   @relation(fields: [parentId], references: [id])
+}
+
+model Admission {
+  id                 String          @id @default(uuid())
+  parentName         String
+  parentEmail        String?
+  parentPhone        String
+  childName          String
+  childDob           DateTime
+  childGender        String
+  medicalNotes       String?
+  status             AdmissionStatus @default(PENDING)
+  submittedAt        DateTime        @default(now())
+}
