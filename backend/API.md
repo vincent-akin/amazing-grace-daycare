@@ -13,8 +13,8 @@ Step 2: Login
 
 POST /api/auth/login
 {
-"token": "jwt_token_here",
-"user": { ... }
+"email": "admin@amazinggrace.com",
+"password": "123456"
 }
 
 Step 3: Access protected route
