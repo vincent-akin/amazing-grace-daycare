@@ -1,75 +1,91 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import api from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+    const router = useRouter();
 
-  const [error, setError] = useState("");
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+        setLoading(true);
+        setError("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+        try {
+            const res = await api.post("/auth/login", {
+                email,
+                password,
+            });
 
-    try {
-      const res = await api.post("/auth/login", form);
+            localStorage.setItem("token", res.data.token);
+            router.push("/dashboard");
 
-      localStorage.setItem("token", res.data.token);
+        } catch (err: any) {
+            setError(err.response?.data?.message || "Login failed");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-      router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Login failed");
-    }
-  };
+    return (
+        <div className="min-h-screen bg-orange-50 flex items-center justify-center px-6">
+            <div className="w-full max-w-md rounded-3xl bg-white p-10 shadow-lg">
+                <div className="text-center">
+                    <p className="text-sm font-semibold uppercase tracking-wide text-orange-600">
+                        Admin Access
+                    </p>
 
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md space-y-4 rounded-lg border p-8 shadow"
-      >
-        <h1 className="text-2xl font-bold">Admin Login</h1>
+                    <h1 className="mt-3 text-3xl font-bold text-gray-900">
+                        Welcome Back
+                    </h1>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="w-full rounded border p-3"
-          onChange={handleChange}
-        />
+                    <p className="mt-3 text-gray-600">
+                        Sign in to manage admissions and daycare records.
+                    </p>
+                </div>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="w-full rounded border p-3"
-          onChange={handleChange}
-        />
+                <form
+                    onSubmit={handleLogin}
+                    className="mt-8 space-y-5"
+                >
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
 
-        {error && (
-          <p className="text-red-500 text-sm">{error}</p>
-        )}
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
 
-        <button
-          type="submit"
-          className="w-full rounded bg-black p-3 text-white"
-        >
-          Login
-        </button>
-      </form>
-    </div>
-  );
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full rounded-full bg-orange-500 p-4 font-medium text-white transition hover:bg-orange-600 disabled:opacity-50"
+                    >
+                        {loading ? "Signing in..." : "Sign In"}
+                    </button>
+                </form>
+
+                {error && (
+                    <p className="mt-5 text-center text-red-600">
+                        {error}
+                    </p>
+                )}
+            </div>
+        </div>
+    );
 }

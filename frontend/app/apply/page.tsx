@@ -60,7 +60,7 @@ export default function ApplyPage() {
             const apiError = error.response?.data?.message;
 
             if (Array.isArray(apiError)) {
-                setMessage(apiError.map((e) => e.message).join(", "));
+                setMessage(apiError.map((e: any) => e.message).join(", "));
             } else {
                 setMessage(apiError || "Submission failed.");
             }
@@ -71,93 +71,106 @@ export default function ApplyPage() {
     };
 
     return (
-        <div className="mx-auto max-w-2xl p-8">
-            <h1 className="mb-6 text-3xl font-bold">
-                Admission Application
-            </h1>
+        <div className="min-h-screen bg-orange-50 py-16 px-6">
+            <div className="mx-auto max-w-3xl rounded-3xl bg-white p-10 shadow-lg">
+                <div className="mb-10 text-center">
+                    <p className="text-sm font-semibold uppercase tracking-wide text-orange-600">
+                        Amazing Grace Daycare
+                    </p>
 
-            <form
-                onSubmit={handleSubmit}
-                className="space-y-4"
-            >
-                <input
-                    name="parentName"
-                    placeholder="Parent Name"
-                    value={form.parentName}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
-                />
+                    <h1 className="mt-3 text-4xl font-bold text-gray-900">
+                        Admission Application
+                    </h1>
 
-                <input
-                    name="parentEmail"
-                    type="email"
-                    placeholder="Parent Email"
-                    value={form.parentEmail}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
-                />
+                    <p className="mt-4 text-gray-600">
+                        Complete the form below to begin your child’s enrollment journey.
+                    </p>
+                </div>
 
-                <input
-                    name="parentPhone"
-                    placeholder="Parent Phone"
-                    value={form.parentPhone}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
-                />
-
-                <input
-                    name="childName"
-                    placeholder="Child Name"
-                    value={form.childName}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
-                />
-
-                <input
-                    name="childDob"
-                    type="date"
-                    value={form.childDob}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
-                />
-
-                <select
-                    name="childGender"
-                    value={form.childGender}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-5"
                 >
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
+                    <input
+                        name="parentName"
+                        placeholder="Parent Name"
+                        value={form.parentName}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
 
-                <textarea
-                    name="medicalNotes"
-                    placeholder="Medical Notes (optional)"
-                    value={form.medicalNotes}
-                    onChange={handleChange}
-                    className="w-full rounded border p-3"
-                />
+                    <input
+                        name="parentEmail"
+                        type="email"
+                        placeholder="Parent Email"
+                        value={form.parentEmail}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full rounded bg-black p-3 text-white disabled:opacity-50"
-                >
-                    {loading ? "Submitting..." : "Submit Application"}
-                </button>
-            </form>
+                    <input
+                        name="parentPhone"
+                        placeholder="Parent Phone"
+                        value={form.parentPhone}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
 
-            {message && (
-                <p
-                    className={`mt-4 ${
-                        isError ? "text-red-600" : "text-green-600"
-                    }`}
-                >
-                    {message}
-                </p>
-            )}
+                    <input
+                        name="childName"
+                        placeholder="Child Name"
+                        value={form.childName}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
+
+                    <input
+                        name="childDob"
+                        type="date"
+                        value={form.childDob}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    />
+
+                    <select
+                        name="childGender"
+                        value={form.childGender}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                    >
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+
+                    <textarea
+                        name="medicalNotes"
+                        placeholder="Medical Notes (optional)"
+                        value={form.medicalNotes}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-orange-200 p-4 focus:border-orange-500 focus:outline-none"
+                        rows={4}
+                    />
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full rounded-full bg-orange-500 p-4 font-medium text-white transition hover:bg-orange-600 disabled:opacity-50"
+                    >
+                        {loading ? "Submitting..." : "Submit Application"}
+                    </button>
+                </form>
+
+                {message && (
+                    <p
+                        className={`mt-6 text-center ${
+                            isError ? "text-red-600" : "text-green-600"
+                        }`}
+                    >
+                        {message}
+                    </p>
+                )}
+            </div>
         </div>
     );
 }

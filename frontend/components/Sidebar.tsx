@@ -40,10 +40,10 @@ export default function Sidebar() {
         </Link>
 
         <button
-          onClick={logout}
-          className="w-full rounded bg-black p-2 text-white"
-        >
-          Logout
+            onClick={logout}
+            className="rounded-full border border-orange-300 px-5 py-2 text-orange-600 transition hover:bg-orange-100"
+          >
+            Logout
         </button>
       </nav>
     </aside>
