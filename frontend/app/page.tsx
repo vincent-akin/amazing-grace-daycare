@@ -1,65 +1,174 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <main className="min-h-screen bg-orange-50">
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-8 py-24">
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-orange-600">
+              Welcome to Amazing Grace Daycare
+            </p>
+
+            <h1 className="text-5xl font-bold leading-tight text-gray-900">
+              A Safe, Loving Place for Your Child to Learn and Grow
+            </h1>
+
+            <p className="mt-6 text-lg text-gray-600">
+              We provide nurturing childcare in a secure and engaging
+              environment where every child is encouraged to thrive.
+            </p>
+
+            <div className="mt-8 flex gap-4">
+              <Link
+                href="/apply"
+                className="rounded-full bg-orange-500 px-6 py-3 font-medium text-white transition hover:bg-orange-600"
+              >
+                Apply Now
+              </Link>
+
+              <Link
+                href="/about"
+                className="rounded-full border border-orange-300 px-6 py-3 font-medium text-orange-700 hover:bg-orange-100"
+              >
+                Learn More
+              </Link>
+            </div>
+          </div>
+
+          <div className="rounded-3xl bg-white p-8 shadow-lg">
+            <img
+              src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9"
+              alt="Children learning"
+              className="rounded-2xl"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-6xl px-8">
+          <h2 className="text-center text-4xl font-bold text-gray-900">
+            Why Parents Choose Us
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600">
+            We combine compassionate care with structured early learning.
+          </p>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
+            <div className="rounded-3xl bg-orange-50 p-8">
+              <h3 className="text-xl font-semibold text-orange-700">
+                Safe Environment
+              </h3>
+
+              <p className="mt-3 text-gray-600">
+                Secure facilities designed for comfort, learning, and play.
+              </p>
+            </div>
+
+            <div className="rounded-3xl bg-orange-50 p-8">
+              <h3 className="text-xl font-semibold text-orange-700">
+                Caring Staff
+              </h3>
+
+              <p className="mt-3 text-gray-600">
+                Experienced caregivers committed to every child’s wellbeing.
+              </p>
+            </div>
+
+            <div className="rounded-3xl bg-orange-50 p-8">
+              <h3 className="text-xl font-semibold text-orange-700">
+                Holistic Growth
+              </h3>
+
+              <p className="mt-3 text-gray-600">
+                Supporting emotional, social, and academic development.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Programs */}
+      <section className="bg-orange-50 py-24">
+        <div className="mx-auto max-w-6xl px-8">
+          <h2 className="text-center text-4xl font-bold text-gray-900">
+            Our Programs
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600">
+            Carefully designed programs that support each stage of early childhood development.
+          </p>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
+            <div className="rounded-3xl bg-white p-8 shadow-md">
+              <h3 className="text-2xl font-semibold text-orange-600">
+                Infants
+              </h3>
+
+              <p className="mt-2 text-sm text-gray-500">
+                6 months – 2 years
+              </p>
+
+              <p className="mt-4 text-gray-600">
+                Gentle care, sensory stimulation, and nurturing routines
+                for your little one.
+              </p>
+            </div>
+
+            <div className="rounded-3xl bg-white p-8 shadow-md">
+              <h3 className="text-2xl font-semibold text-orange-600">
+                Toddlers
+              </h3>
+
+              <p className="mt-2 text-sm text-gray-500">
+                2 – 4 years
+              </p>
+
+              <p className="mt-4 text-gray-600">
+                Guided play, social interaction, and foundational learning
+                experiences.
+              </p>
+            </div>
+
+            <div className="rounded-3xl bg-white p-8 shadow-md">
+              <h3 className="text-2xl font-semibold text-orange-600">
+                Preschool
+              </h3>
+
+              <p className="mt-2 text-sm text-gray-500">
+                4 – 5 years
+              </p>
+
+              <p className="mt-4 text-gray-600">
+                Early academic preparation, creativity, and confidence-building
+                activities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-orange-500 py-20 text-center text-white">
+        <h2 className="text-4xl font-bold">
+          Ready to Join Amazing Grace?
+        </h2>
+
+        <p className="mt-4 text-lg">
+          Begin your child’s journey with us today.
+        </p>
+
+        <Link
+          href="/apply"
+          className="mt-8 inline-block rounded-full bg-white px-8 py-3 font-medium text-orange-600"
+        >
+          Start Application
+        </Link>
+      </section>
+    </main>
   );
 }
